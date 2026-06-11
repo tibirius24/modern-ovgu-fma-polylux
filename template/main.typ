@@ -1,141 +1,135 @@
-#import "@preview/modern-ovgu-fma-polylux:0.2.0" : *
-//#import "../modern-ovgu-fma-polylux.typ" : *
+#import "@preview/modern-ovgu-fma-polylux:1.0.0": *
 
 #show: ovgu-fma-theme.with(
-  author: [Vorname Nachname],
-  title: [Titel der Präsentation],
-  affiliation: [affiliation],
+  author: [Firstname Lastname],
+  title: [Presentation Title],
   date: ez-today.today(),
-  text-lang: "de",
+  text-lang: "en",
 )
 
-#show: document => conf-equations(document)
+#show: document => conf-equations(document) // This apply some mathmatical useful shortcuts
 
 #title-slide(
-  subtitle: [Hier könnte ihr Subtitel stehen]
+  subtitle: [a possible subtitle],
 )
 
-#outline-slide()[]
+#outline-slide()
 
-#header-slide()[
-  Verwenden mathematischer Umgebungen
+#header-slide()[Some Examples for content]
+
+#slide(
+  heading: [How to use equations],
+)[
+  You could define Equations like this:
+  $ a/b = c/d $
+  This equations will be numbered, if you put a lable on it:
+  $ a^2 + b^2 = c^2 $ <pythagoras>
+  The @pythagoras describes Pythagoras theorem. A proof you could find in @gerwig2021satz.
 ]
 
-#folie()[
-  == Verwendung von Gleichungen
-  Wir können Gleichungen definieren:
-    $ a/b = c/d $
-  Diese werden nummeriert, wenn sie mit einem Label markiert werden.
-    $ a^2 + b^2 = c^2 $ <pythagoras>
-  Entsprechend seht ihr, dass @pythagoras Pythagoras ist. Ein Beweis findet sich in @gerwig2021satz.
-]
-
-#header-slide()[Beispiele für den Inhalt]
-
-#folie(
-  heading: [Multi-Column-Folien]
+#slide(
+  heading: [Multi-Column-sliden],
 )[
   #toolbox.side-by-side()[#lorem(39)][#lorem(30)][#lorem(35)]
 ]
 
-#set footnote.entry(clearance: 0.25em)
-#folie()[
-  
+#slide(
+  block-height: 85%,
+)[
   #figure(
-    caption: [Beispielgrafik#footnote([Erstellt von Malte])]
-  )[#image("example-image.jpg",height: 80%)]
+    caption: [Exampleimage#footnote([Thanks to Malte for creating this image])],
+  )[#image("example-image.jpg", height: 70%)]
+  You could also use footnotes and images. In the case of Footnotes you have to change the block-height to not cause a pagebreak.
 ]
 
-#header-slide()[nützliche Features]
+#header-slide()[Usefull features and hints]
 
-#folie()[
-  Keine Idee wie man dieses mathematische Symbol in Typst schreibt?
-  
+#slide()[
+  Don't know how to write this mathmatical symbol in Typst? Check this website:
+
   #align(center)[
     #block(
       stroke: 2.5pt + fma,
       fill: fma-lighter,
       radius: 0.5em,
-      inset: 0.5em, 
+      inset: 0.5em,
     )[
       #set text(fill: rgb(0, 0, 255, 255))
-      #set align(center+horizon)
+      #set align(center + horizon)
       #link("https://detypify.quarticcat.com/")
     ]
   ]
-  
+
   #show: later
 
-  Welche Funktionen bietet eigentlich Polylux noch?
+  What else is possible with polylux?
   #align(center)[
     #block(
       stroke: 2.5pt + fma,
       fill: fma-lighter,
       radius: 0.5em,
-      inset: 0.5em, 
+      inset: 0.5em,
     )[
       #set text(fill: rgb(0, 0, 255, 255))
-      #set align(center+horizon)
+      #set align(center + horizon)
       #link("https://polylux.dev/book/getting-started/getting-started.html")
     ]
   ]
-  
+
   #show: later
 
-  Wie erstelle ich aus meiner Präsentation ein Handout? ("Animationen" ausschalten)
+  How could I generate a handout from my presentation? ( turn "animations" off)
   #align(center)[
     #block(
       stroke: 2.5pt + fma,
       fill: fma-lighter,
       radius: 0.5em,
-      inset: 0.5em, 
+      inset: 0.5em,
     )[
       #set text(fill: rgb(0, 0, 255, 255))
-      #set align(center+horizon)
-      Setze an den Anfang deines Codes den Befehl: 
-      ```typ 
-        #enable-handout-mode(true)
+      #set align(center + horizon)
+      Put in the beginning of your code this command
+      ```typ
+      #enable-handout-mode(true)
       ```
     ]
   ]
 ]
 
-#folie(
-  heading: ["Animationen"]
+#slide(
+  heading: ["animations"],
 )[
-  Ist es dir aufgefallen? Auf der vorherigen Folie haben wir die Items mit
+  Did you noticed it? On the slide before we used this command
   #align(center)[
     #block(
       stroke: 2.5pt + fma,
       fill: fma-lighter,
       radius: 0.5em,
-      inset: 0.5em, 
+      inset: 0.5em,
     )[
       #set text(fill: rgb(0, 0, 255, 255))
-      #set align(center+horizon)
+      #set align(center + horizon)
       ```typ
-        #show: later  
+      #show: later
       ```
     ]
   ]
-
-  nacheinander erscheinen lassen. Es gibt viele weitere alternative Hilfsfunktionen. Details könnt ihr hier:
+  to let pop up this boxes one after an other. There are much more helper functions. You could look them up under:
   #align(center)[
     #block(
       stroke: 2.5pt + fma,
       fill: fma-lighter,
       radius: 0.5em,
-      inset: 0.5em, 
+      inset: 0.5em,
     )[
       #set text(fill: rgb(0, 0, 255, 255))
-      #set align(center+horizon)
+      #set align(center + horizon)
       #link("https://polylux.dev/book/dynamic/helper.html")
     ]
   ]
-  nachlesen.
 ]
 
-#header-slide()[Bibliographie]
+#header-slide()[Bibliography]
 
 #slide-base(
   show-section: false,

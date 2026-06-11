@@ -1,12 +1,14 @@
 [package]
 name = "modern-ovgu-fma-polylux"
-version = "0.1.0"
+version = "1.0.0"
+entrypoint = "modern-ovgu-fma-polylux.typ"
+authors = ["Jonas Danker"]
 license = "MIT"
 description = "Unofficial template for creating presentations with Polylux in the style of the Faculty of Mathematics at the Otto-von-Guericke-University Magdeburg."
-categories = ["presentation"]
+repository = "https://github.com/tibirius24/modern-ovgu-fma-polylux"
 keywords = ["presentation", "polylux", "FMA", "Faculty of Mathematics", "university", "OVGU", "Magdeburg", "Otto-von-Guericke Universität"]
-authors = ["Jonas Danker"]
-entrypoint = "modern-ovgu-fma-polylux.typ"
+categories = ["presentation"]
+disciplines = ["mathematics"]
 exclude = [
     "*.pdf",
     "*.png",

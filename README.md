@@ -1,36 +1,35 @@
-Unofficial template for creating presentations with [Polylux](https://typst.app/universe/package/polylux) in the style of the Faculty of Mathematics at Otto von Guericke University Magdeburg. Some documentation and an introduction to Polylux can be found [here](https://polylux.dev/book/).
+Unofficial template for creating presentations with [Polylux](https://typst.app/universe/package/polylux) in the style of the Faculty of Mathematics at Otto-von-Guericke-University Magdeburg. Some documentation and an introduction to Polylux can be found [here](https://polylux.dev/book/).
 
 The template can be used via:
-```
-typst init @preview/modern-ovgu-fma-polylux:0.1.0
+```pwsh
+typst init @preview/modern-ovgu-fma-polylux:1.0.0
 ```
 
 You can also use the template via:
 ```typ
-#import "@preview/modern-ovgu-fma-polylux:0.1.0" : *
+#import "@preview/modern-ovgu-fma-polylux:1.0.0": *
 ```
 and then initialize it with:
 ```typ
 #show: ovgu-fma-theme.with(
-  author: [First Name Last Name],
+  author: [Firstname Lastname],
   title: [Presentation Title],
-  affiliation: [affiliation],
   date: ez-today.today(),
+  text-lang: "en",
 )
 ```
-Additional parameters allow further customization:
+Additional parameters allow further customization. The first three parameters will be passed to the ```#text()``` function.
 ```typ
 #show: ovgu-fma-theme.with(
   text-font: "Liberation Sans",
-  text-lang: "en",
+  text-lang: "de",
   text-size: 20pt,
-  author:[],
-  title:[],
-  affiliation:[],
-  date:[],
+  author: [],
+  title: [],
+  date: [],
 )
 ```
-The author, title, and date will later be used for the header and footer of the slides.
+The author, title, and date will later be used for the header and footer of the slides. They will be also used for the title slide, if no other parameters are given there.
 
 # Slide Types
 ## Title Slide
@@ -38,11 +37,29 @@ The author, title, and date will later be used for the header and footer of the 
 ```typ
 #title-slide(
   author: none,
-  date
-  title: [Presentation Title],
-  subtitle: [Your subtitle here],
+  date: none,
+  title: none,
+  subtitle: none,
+  max-width: 75%,
+  body
 )
 ```
+The values for author, date or title aren't set here, they will be used from the show-rule from the beginning. If you want this values to be empty, then set them to ```[]```. The max-with argument sets the maximal width which the title takes from the page.
+
+## Base Slide
+```typ
+#slide-base(
+  heading: none,
+  show-section: true,
+  block-height: none,
+)[]
+```
+This is the foundation for all slide types, except the title slide.
+- `heading: content`: serves as the slide title.
+- `show-section: bool`: if true, the current section title is displayed in the footer.
+- `block-height: relative`: if set, it will be used as the height of the main content block. If footnotes are used, you have manually to adjust this to not cause some unwanted page breaks. A good starting value for adjusting is 85%.
+
+Further you could find the different kinds of slides based on this slide-type.
 
 ## Outline Slide
 ![outline-slide](./images/outline-slide.png)
@@ -51,35 +68,26 @@ The author, title, and date will later be used for the header and footer of the 
   heading:none,
 )[]
 ```
+The heading argument will be used for the title in the outline-slide. If set to none some language specific default will be used. (Currently the two supported languages are German and English)
 
 ## Header Slide
 ![header-slide](./images/header-slide.png)
 ```typ
 #header-slide()[Examples for content]
 ```
-Headings created with this slide type will be displayed in the outline slide. To include additional headings in the outline slide, they must be registered manually using:
+Headings created with this type of slide will be displayed in the outline slide. To include additional headings in the outline slide, they must be registered manually using:
 ```typ
 #toolbox.register-section(head)
 ```
 
-## Base Slide
-```typ
-#slide-base(
-  heading: none,
-  show-section: true,
-)[]
-```
-This is the foundation for all slide types.
-- `heading: content`: serves as the slide title.
-- `show-section: bool`: if true, the current section title is displayed in the footer.
 
 ## Slide
-This slide type is based on the base slide. Below are some examples of slides.
+This is probably the slide you will use most often. Below are some examples with this slide, which use different kinds of content.
 ### Multi-Column Layout
 ![slide-content](./images/slide-content.png)
 ```typ
-#folie(
-  heading: [Multi-Column Slides]
+#slide(
+  heading: [Multi-Column-Folien],
 )[
   #toolbox.side-by-side()[#lorem(39)][#lorem(30)][#lorem(35)]
 ]
@@ -88,28 +96,31 @@ This slide type is based on the base slide. Below are some examples of slides.
 ### Using Mathematical Environments
 ![slide-math](./images/slide-math.png)
 ```typ
-#folie()[
-  == Using Equations
-  We can define equations:
-    $ a/b = c/d $
-  These are numbered when marked with a label.
-    $ a^2 + b^2 = c^2 $ <pythagoras>
-  As you can see, @pythagoras is Pythagoras. A proof can be found in @gerwig2021satz.
+#folie(
+  heading: [How to use equations],
+)[
+  You could define Equations like this:
+  $ a/b = c/d $
+  This equations will be numbered, if you put a lable on it:
+  $ a^2 + b^2 = c^2 $ <pythagoras>
+  The @pythagoras describes Pythagoras theorem. A proof you could find in @gerwig2021satz.
 ]
 ```
 
 ### Using an Image
 ![slide-image](./images/slide-image.png)
 ```typ
-#folie()[
+#folie(
+  block-height: 85%,
+)[
   #figure(
-    caption: [Example Graphic#footnote([Created by Malte])]
-  )[#image("example-image.jpg", height: 80%)]
+    caption: [Exampleimage#footnote([Thanks to Malte for creating this image])],
+  )[#image("example-image.jpg", height: 70%)]
+  You could also use footnotes and images. In the case of Footnotes you have to change the block-height to not cause a pagebreak.
 ]
 ```
 
 # Additional Features
-
 ## Numbering Equations
 
 With the show-rule:
@@ -120,6 +131,7 @@ With the show-rule:
 
 Only equations with labels will be numbered. To use this feature, add this command at the beginning of your presentation.
 
+# Hints for usage
 ## Mathematical Symbols
 
 If you don't know the command for a mathematical symbol, the website [detypify](https://detypify.quarticcat.com/) is very helpful. You can simply draw the symbol there, and the corresponding command will be suggested.
