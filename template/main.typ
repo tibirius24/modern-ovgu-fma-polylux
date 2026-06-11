@@ -1,10 +1,10 @@
-#import "@preview/modern-ovgu-fma-polylux:0.1.0" : *
+#import "@preview/modern-ovgu-fma-polylux:0.2.0" : *
 //#import "../modern-ovgu-fma-polylux.typ" : *
 
 #show: ovgu-fma-theme.with(
   author: [Vorname Nachname],
   title: [Titel der Präsentation],
-  affilation: [affilation],
+  affiliation: [affiliation],
   date: ez-today.today(),
   text-lang: "de",
 )

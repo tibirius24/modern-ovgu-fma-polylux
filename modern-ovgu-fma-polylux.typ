@@ -5,7 +5,7 @@
 // States for basic Data
 #let title-state=state("title",[])
 #let author-state=state("author",[])
-#let affilation-state=state("affilation",[])
+#let affiliation-state=state("affiliation",[])
 #let date-state=state("date",[])
 
 // Color-Schemes
@@ -21,7 +21,7 @@
   text-size: 20pt,
   author:[],
   title:[],
-  affilation:[],
+  affiliation:[],
   date:[],
   body
 ) = {
@@ -42,7 +42,7 @@
   context {
     title-state.update(title)
     author-state.update(author)
-    affilation-state.update(affilation)
+    affiliation-state.update(affiliation)
     date-state.update(date)
   }
   body
